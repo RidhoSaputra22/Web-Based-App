@@ -1,3 +1,60 @@
-.display{
-    font-size: 50px;
+*{
+    padding: 0px;
+    margin: 0px;
+}
+
+.container{
+    margin: 150px auto;
+    width: fit-content;
+    display: grid;
+    grid-auto-flow: row;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    background-color: rgb(186, 186, 186);
+    border: 2px solid black;
+    border-radius: 5px ;
+
+}
+
+span{
+    background-color: azure;
+    text-align: center;
+    padding: 10px;
+    border: 2px solid black;
+    padding: 20px;
+    border-radius: 5px;
+    font-size: 23px;
+
+
+
+}
+
+span:hover{
+    background-color: aquamarine;
+}
+
+span:active{
+    background-color: red;
+}
+
+#plus{
+    grid-row: 2 span;
+}
+
+#ac{
+    grid-column: 2 span;
+}
+
+#num-display{
+    font-size: 30px;
+    font-weight: 100;
+    /* font-stretch: expanded; */
+    /* position: relative; */
+    grid-column: 4 span;
+    text-align: right;
+    height: 50px;
+    padding-right: 10px;
+    margin: 15px;
+    border: 3px solid black;
+    color: rgb(0, 0, 0);
+    background-color: rgb(249, 249, 249);
 }

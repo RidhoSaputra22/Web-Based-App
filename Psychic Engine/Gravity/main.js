@@ -4,14 +4,14 @@ window.onload = function(){
     var canvas = document.getElementById('canvas'),
         ctx = canvas.getContext('2d'),
         width = canvas.width = window.innerWidth,
-        height = canvas.height = window.innerHeight,
+        height = canvas.height = 350,
         w = width / 2,
         h = height / 2;
 
     var sun = vector.create(w, h),
         sunMass = 20000;
 
-    var planet = vector.create(w + 200, h),
+    var planet = vector.create(w + 150, h),
         planetVelocity = vector.create(0,0);
 
     var grav = vector.create(0,0);
@@ -24,12 +24,12 @@ window.onload = function(){
     function render(){
         ctx.clearRect(0,0, width, height)
 
-        //Get the distance between sun and planet
+        //Get the distance between the sun and the planet
         var dx = sun.getX() - planet.getX(),
             dy = sun.getY() - planet.getY();
         var dist = Math.sqrt(dx * dx + dy * dy)
         
-        //Set the length ang angle of grav vector
+        //Set the length and angle of grav vector
         grav.setLength(sunMass / (dist * dist))
         grav.setAngle(Math.atan2(dy,dx))
         

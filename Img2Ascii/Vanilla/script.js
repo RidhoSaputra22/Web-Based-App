@@ -11,7 +11,7 @@ const ctx = canvas.getContext("2d");
 //Load Image
 const img = new Image();
 img.crossOrigin = "anonymous";
-img.src = "./images.jpg";
+img.src = "./images40.jpg";
 img.addEventListener("load", () => {
   ctx.drawImage(img, 0, 0);
   img.style.display = "none";
