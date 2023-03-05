@@ -1,10 +1,17 @@
 *{
     padding: 0px;
     margin: 0px;
+
+}
+
+body{
+  padding: 0px;
+  background-color: aqua;
+  overflow-y: hidden;
 }
 
 .container{
-    margin: 150px auto;
+    margin: 100px auto;
     width: fit-content;
     display: grid;
     grid-auto-flow: row;
