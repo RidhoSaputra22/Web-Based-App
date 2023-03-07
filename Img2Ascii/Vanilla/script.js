@@ -1,7 +1,9 @@
 //Author : Ridho Saputra
 
 // Variable
-const density =" .:-=+*#%@"
+const density ="@%#*+=-:.        "
+
+
 var text = '';
 
 //Load Canvas
@@ -10,19 +12,37 @@ const ctx = canvas.getContext("2d");
 
 //Load Image
 const img = new Image();
-img.crossOrigin = "anonymous";
-img.src = "./images40.jpg";
-img.addEventListener("load", () => {
-  ctx.drawImage(img, 0, 0);
-  img.style.display = "none";
+function previewFile() {
+  text = '';
+  const file = document.querySelector("input[type=file]").files[0];
+  const reader = new FileReader();
+
+  reader.addEventListener(
+    "load",
+    () => {
+      // convert image file to base64 string
+      img.src = reader.result;
+    },
+    false
+  );
+
+  if (file) {
+    reader.readAsDataURL(file);
+  }
+   
+}
+// img.src = './images.jpg'
+img.addEventListener('load', ()=>{
+  ctx.drawImage(img, 0,0,40,40)
+  ascii()
 });
 
+ 
 // START
-window.onload = () => {
-
+function ascii() {
     // Accsess all pixel data using loop
-    for (let y = 0; y < img.height; y++){
-        for (let x = 0; x < img.width; x++){
+    for (let y = 0; y <40; y++){
+        for (let x = 0; x < 40; x++){
             const pixel = ctx.getImageData(x,y,1,1)
             const data = pixel.data;
     
@@ -32,7 +52,6 @@ window.onload = () => {
             // map the avg value to ascii
             const len = density.length;
             const textIndex = Math.floor((avg * (len - 1)) / 255)
-            console.log(textIndex)
 
             // put the ascii into the text variable
             if (density[textIndex] == ' '){
@@ -42,5 +61,7 @@ window.onload = () => {
         }
         text += '<br>' // '\n' 
     }
+    
     document.getElementById('p').innerHTML = text
 }
+
