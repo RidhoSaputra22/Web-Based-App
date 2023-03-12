@@ -37,6 +37,8 @@ class AndGate{
 
     }
 
+    
+
     posX(){
         return(this.x)
     }
@@ -105,27 +107,27 @@ class AndGate{
             
     }
 
-    nodeA_posX(){
+    nodeA_X(){
         return(this.x)
     }
 
-    nodeA_posY(){
+    nodeA_Y(){
         return(this.y + 40)
     }
 
-    nodeB_posX(){
+    nodeB_X(){
         return(this.x)
     }
 
-    nodeB_posY(){
+    nodeB_Y(){
         return(this.y + 100)
     }
 
-    nodeC_posX(){
+    nodeC_X(){
         return(this.x + 100)
     }
 
-    nodeC_posY(){
+    nodeC_Y(){
         return(this.y + 70)
     }
     
@@ -157,6 +159,20 @@ class AndGate{
     nodeGive_data(x,y){
         ctx.beginPath();
         ctx.moveTo(x,y)
+    }
+
+    to_nodeA(x,y){
+        ctx.beginPath()
+        ctx.moveTo(x,y)
+        ctx.lineTo(this.nodeA_X(), this.nodeA_Y())
+        ctx.closePath()
+    }
+
+    to_nodeB(x,y){
+        ctx.beginPath()
+        ctx.moveTo(x,y)
+        ctx.lineTo(this.nodeB_X(), this.nodeB_Y())
+        ctx.closePath()
     }
    
 

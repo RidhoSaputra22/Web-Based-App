@@ -35,6 +35,18 @@ class AndGate{
 
     }
 
+    set_nodeA_val(val){
+        this.inputA = val
+    }
+
+    set_nodeB_val(val){
+        this.inputA = val
+    }
+
+    get_nodeC_val(){
+        return(this.inputA && this.inputB)
+    }
+
     posX(){
         return(this.x)
     }
@@ -59,6 +71,64 @@ class AndGate{
             ){
                 return(true)
             }
+    }
+
+    nodeA_is_click(x,y){
+        let dx = this.x - x;
+        let dy = (this.y + 40) - y;
+
+        let dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < 10){
+            return(true)
+        }
+
+        return(false)
+            
+    }
+
+    nodeB_is_click(x,y){
+        let dx = this.x - x;
+        let dy = (this.y + 100) - y;
+
+        let dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < 10){
+            return(true)
+        }
+
+        return(false)
+            
+    }
+
+    nodeC_is_click(x,y){
+        let dx = (this.x + 100) - x;
+        let dy = (this.y + 70) - y;
+
+        let dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < 10){
+            return(true)
+        }
+
+        return(false)
+            
+    }
+
+    connected_to_nodeA(g2){
+        ctx.beginPath()
+        ctx.moveTo(this.x + 100, this.y + 50);
+        ctx.lineTo(g2.posX(), g2.posY() + 20);
+        ctx.stroke()
+        ctx.closePath()
+    }
+
+    connected_to_nodeB(g2){
+        ctx.beginPath()
+        ctx.moveTo(this.x + 100, this.y + 50);
+        ctx.lineTo(g2.posX(), g2.posY() + 80);
+        ctx.stroke()
+        ctx.closePath()
     }
    
 
