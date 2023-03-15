@@ -1,43 +1,196 @@
-class AndGate{
-    constructor(inputA, inputB){
-        this.inputA = inputA;
-        this.inputB = inputB;
-        this.x = 0;
-        this.y = 0;
-        this.width = 100;
+class Gate{
+    constructor(type){
+        this.inputA = 1;
+        this.inputB = 0;
+        this.type = type;
+        this.x = 10
+        this.y = 10
+        this.width = 130;
         this.height = 100;
     }
 
     update(){
+        if(this.type == 'and') this.type_and();
+        if(this.type == 'or') this.type_or();
+        if(this.type == 'not')this.type_not();
+        if(this.type == 'input') this.type_input();
+        if(this.type == 'output') this.type_output();
 
+        
+    }
+
+    type_and(){
         ctx.beginPath()
         ctx.rect(this.x, this.y, this.width,this.height);
         ctx.fillStyle = 'black'
         ctx.fill();
+        ctx.closePath()
+
+
+        ctx.beginPath();
+        ctx.font = this.width/5 + "px Arial";
+        ctx.fillStyle = 'red'
+        ctx.fillText("AND",this.x + 60, this.y + 70);
+        ctx.fill()
+        ctx.closePath()
 
         //NodeA
         ctx.beginPath()
         ctx.arc(this.x, this.y + 20, 10, 0, 2 * Math.PI)
         ctx.fillStyle = (this.inputA == 1 ) ? 'green' : 'red' ;
         ctx.fill();
+        ctx.closePath()
+
 
         //NodeB
         ctx.beginPath()
         ctx.arc(this.x, this.y + 80, 10, 0, 2 * Math.PI)
         ctx.fillStyle = (this.inputB == 1 ) ? 'green' : 'red' ;
         ctx.fill();
+        ctx.closePath()
 
-        //NodeC
+
+        //NodeReturn
         ctx.beginPath()
-        ctx.arc(this.x + 100, this.y + 50, 10, 0, 2 * Math.PI)
+        ctx.arc(this.x + this.width, this.y + 50, 10, 0, 2 * Math.PI)
         ctx.fillStyle = (this.inputA && this.inputB) ? 'green' : 'red' ;
         ctx.fill(); 
+        ctx.closePath()
 
-      
+
+    }
+    type_or(){
+        ctx.beginPath()
+        ctx.rect(this.x, this.y, this.width,this.height);
+        ctx.fillStyle = 'black'
+        ctx.fill();
+        ctx.closePath()
+
+        ctx.beginPath();
+        ctx.font = this.width/5+"px Arial";
+        ctx.fillStyle = 'red'
+        ctx.fillText("OR",this.x + 60, this.y + 70);
+        ctx.fill()
+        ctx.closePath()
+
+        //NodeA
+        ctx.beginPath()
+        ctx.arc(this.x, this.y + 20, 10, 0, 2 * Math.PI)
+        ctx.fillStyle = (this.inputA == 1 ) ? 'green' : 'red' ;
+        ctx.fill();
+        ctx.closePath()
+
+
+        //NodeB
+        ctx.beginPath()
+        ctx.arc(this.x, this.y + 80, 10, 0, 2 * Math.PI)
+        ctx.fillStyle = (this.inputB == 1 ) ? 'green' : 'red' ;
+        ctx.fill();
+        ctx.closePath()
+
+
+        //NodeReturn
+        ctx.beginPath()
+        ctx.arc(this.x + this.width, this.y + 50, 10, 0, 2 * Math.PI)
+        ctx.fillStyle = (this.inputA || this.inputB) ? 'green' : 'red' ;
+        ctx.fill(); 
+        ctx.closePath()
+
+    }
+    type_not(){
+        ctx.beginPath()
+       ctx.rect(this.x, this.y, this.width,this.height);
+       ctx.fillStyle = 'black'
+       ctx.fill();
+       ctx.closePath()
+
+       ctx.beginPath();
+       ctx.font = this.width/5+"px Arial";
+       ctx.fillStyle = 'red'
+       ctx.fillText("NOT",this.x + 60, this.y + 70);
+       ctx.fill()
+       ctx.closePath()
+
+       //NodeA
+       ctx.beginPath()
+       ctx.arc(this.x, this.y + 50, 10, 0, 2 * Math.PI)
+       ctx.fillStyle = (this.inputA == 1 ) ? 'green' : 'red' ;
+       ctx.fill();
+       ctx.closePath()
+
+       //NodeReturn
+       ctx.beginPath()
+       ctx.arc(this.x + this.width, this.y + 50, 10, 0, 2 * Math.PI)
+       ctx.fillStyle = (!this.inputA) ? 'green' : 'red' ;
+       ctx.fill(); 
+       ctx.closePath()
+
+    }
+    type_input(){
+        ctx.beginPath();
+        ctx.rect(this.x , this.y, 50, 50)
+        ctx.fillStyle = 'blue';
+        ctx.fill();
+        ctx.closePath()
+
+        //Switch
+        ctx.beginPath();
+        ctx.rect(this.x + 11 ,this.y + 15, 20, 20)
+        ctx.fillStyle = 'yellow';
+        ctx.fill();
+        ctx.closePath()
+
+        //Main Node
+        ctx.beginPath();
+        ctx.arc(this.x + 50, this.y + 25, 10, 0 ,Math.PI * 2)
+        ctx.fillStyle = (this.inputA == 1) ? 'green' : 'red';
+        ctx.fill();
+        ctx.closePath()
+    }
+    type_output(){
+        ctx.beginPath();
+        ctx.rect(this.x , this.y, 50, 50)
+        ctx.fillStyle = 'red';
+        ctx.fill();
+        ctx.closePath()
+
+        //NodeA
+        ctx.beginPath();
+        ctx.arc(this.x, this.y + 25, 10, 0 ,Math.PI * 2)
+        ctx.fillStyle = (this.inputA == 1) ? 'green' : 'red';
+        ctx.fill();
+        ctx.closePath()
+  
+
+        //NodeC
+        ctx.beginPath();
+        ctx.arc(this.x + 50, this.y + 25, 10, 0 ,Math.PI * 2)
+        ctx.fillStyle = (this.inputA == 1) ? 'green' : 'red';
+        ctx.fill();
+        ctx.closePath()
 
     }
 
-    
+   get_type(){
+    return(this.type)
+   }
+
+    set_nodeA_val(val){
+        this.inputA = val
+    }
+
+    set_nodeB_val(val){
+        this.inputB = val
+    }
+
+    get_nodeC_val(){
+        if(this.type == 'and')  return(this.inputA && this.inputB);
+        if(this.type == 'or')  return(this.inputA || this.inputB);
+        if(this.type == 'not')  return(!this.inputA);
+        if(this.type == 'input') return(this.inputA);
+        if(this.type == 'output') return(this)
+ 
+    }
 
     posX(){
         return(this.x)
@@ -66,13 +219,31 @@ class AndGate{
     }
 
     nodeA_is_click(x,y){
-        let dx = this.x - x;
-        let dy = (this.y + 40) - y;
-
+        let dx;
+        let dy;
+        if(this.type == 'not'){
+            dx = this.x - x;
+            dy = (this.y + 70) - y;
+        }else if(this.type == 'input'){
+            if(
+                x < (this.x + 5) + 20 &&
+                x > (this.x + 5) &&
+                y < (this.y + 29) + 20 &&
+                y > (this.y + 29)
+            ){
+                return(true)
+             }
+        }else if(this.type == 'output'){
+            dx = this.x - x ;
+            dy = this.y + 46 - y ;
+        }else{
+            dx = this.x - x;
+            dy = (this.y + 40) - y;
+        }
         let dist = Math.sqrt(dx * dx + dy * dy);
 
         if (dist < 10){
-            return(true)
+            return(true);
         }
 
         return(false)
@@ -82,22 +253,28 @@ class AndGate{
     nodeB_is_click(x,y){
         let dx = this.x - x;
         let dy = (this.y + 100) - y;
-
         let dist = Math.sqrt(dx * dx + dy * dy);
-
         if (dist < 10){
-            return(true)
+          if(this.type != 'not' && this.type != 'input') return(true);
         }
-
         return(false)
             
     }
 
     nodeC_is_click(x,y){
-        let dx = (this.x + 100) - x;
-        let dy = (this.y + 70) - y;
+        let dx;
+        let dy;
+        if(this.type == 'input'){
+            dx = (this.x + 50) - x;
+            dy = (this.y + 45) - y;
 
+        }else{
+            dx = (this.x + this.width) - x;
+            dy = (this.y + 70) - y;
+        }
+        
         let dist = Math.sqrt(dx * dx + dy * dy);
+        // console.log(dx, dy);
 
         if (dist < 10){
             return(true)
@@ -107,71 +284,33 @@ class AndGate{
             
     }
 
-    nodeA_X(){
-        return(this.x)
-    }
-
-    nodeA_Y(){
-        return(this.y + 40)
-    }
-
-    nodeB_X(){
-        return(this.x)
-    }
-
-    nodeB_Y(){
-        return(this.y + 100)
-    }
-
-    nodeC_X(){
-        return(this.x + 100)
-    }
-
-    nodeC_Y(){
-        return(this.y + 70)
-    }
-    
-    nodeA_value(){
-        return(this.inputA)
-    }
-
-    nodeB_value(){
-        return(this.inputB)
-    }
-
-    nodeC_value(){
-        return(this.inputA && this.inputB)
-    }
-
-    nodeA_set_value(val){
-        this.inputA = val;
-    }
-
-    nodeB_set_value(val){
-        this.inputB = val;
-    }
-
-    nodeGet_data(x,y){
-        ctx.lineTo(x,y)
-        ctx.stroke()
-    }
-
-    nodeGive_data(x,y){
-        ctx.beginPath();
-        ctx.moveTo(x,y)
-    }
-
-    to_nodeA(x,y){
+    connected_to_nodeA(g2){
         ctx.beginPath()
-        ctx.moveTo(x,y)
-        ctx.lineTo(this.nodeA_X(), this.nodeA_Y())
+        if(this.type == 'input'){
+        ctx.moveTo(this.x + 50, this.y + 25);
+        }else{
+        ctx.moveTo(this.x + this.width, this.y + 50);
+        }
+        if(g2.type == 'not'){
+            ctx.lineTo(g2.posX(), g2.posY() + 50);
+        }if(g2.type == 'output'){
+            ctx.lineTo(g2.posX(), g2.posY() + 25);
+        }else{
+            ctx.lineTo(g2.posX(), g2.posY() + 20);
+        }
+        ctx.stroke()
         ctx.closePath()
     }
 
-    to_nodeB(x,y){
+    connected_to_nodeB(g2){
         ctx.beginPath()
-        ctx.moveTo(x,y)
-        ctx.lineTo(this.nodeB_X(), this.nodeB_Y())
+        if(this.type == 'input'){
+        ctx.moveTo(this.x + 50, this.y + 25);
+        }else{
+        ctx.moveTo(this.x + this.width, this.y + 50);
+        }
+        ctx.lineTo(g2.posX(), g2.posY() + 80);
+        ctx.stroke()
         ctx.closePath()
     }
    

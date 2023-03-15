@@ -5,10 +5,11 @@ var canvas = document.getElementById('canvas'),
 
 
 var gate = [];
-gate[0] = new AndGate(1,1);
-gate[1] = new AndGate(0,1);
-gate[2] = new AndGate(1,1);
-gate[3] = new AndGate(0,1);
+gate[0] = new Gate("or");
+gate[1] = new Gate("not");
+gate[2] = new Gate("output");
+gate[3] = new Gate("input");
+
 
 var connection = [],
     n = 0,
@@ -28,25 +29,27 @@ function draw(){
     gate[2].update()
     gate[3].update()
 
+
     ctx.beginPath()
     ctx.font = "30px Arial";
+    ctx.fillStyle = 'yellow'
     ctx.fillText("0", gate[0].posX() + 30, gate[0].posY() + 49);
-    ctx.font = "30px Arial";
     ctx.fillText("1", gate[1].posX() + 30, gate[1].posY() + 49);
-    ctx.font = "30px Arial";
-    ctx.fillText("2", gate[2].posX() + 30, gate[2].posY() + 49);
-    ctx.font = "30px Arial";
-    ctx.fillText("3", gate[3].posX() + 30, gate[3].posY() + 49);
+    ctx.fillStyle = 'black'
+    ctx.fillText("2", gate[2].posX() + 30, gate[2].posY() + 79);
+    ctx.fillStyle = 'black'
+    ctx.fillText("3", gate[3].posX() + 30, gate[3].posY() + 79);
 
     if(connections_not_empty){
         for(let i = 0; i < connections.length; i++){
             for(let j = 0; j < 1 ; j++){
                 if(connections[i][2] == 0){
                     gate[connections[i][j]].connected_to_nodeA(gate[connections[i][j+1]])
-                gate[connections[i][j + 1]].set_nodeA_val(gate[connections[i][j]].get_nodeC_val())
+                    gate[connections[i][j + 1]].set_nodeA_val(gate[connections[i][j]].get_nodeC_val())
+                    
                 }else{
                     gate[connections[i][j]].connected_to_nodeB(gate[connections[i][j+1]])
-                gate[connections[i][j + 1]].set_nodeB_val(gate[connections[i][j]].get_nodeC_val())
+                    gate[connections[i][j + 1]].set_nodeB_val(gate[connections[i][j]].get_nodeC_val())
                     
                 }
 
@@ -57,6 +60,8 @@ function draw(){
 
 
 }
+
+
 let clickId = 0;
 canvas.addEventListener('mousedown', e =>{
     if(gate[0].is_click(e.clientX, e.clientY)){
@@ -102,18 +107,31 @@ function onMouseUp(e){
     canvas.removeEventListener('mouseup', onMouseUp);
 
 }
+
 canvas.addEventListener('click', pickNode)
-let k = 0;
+let k = 0,
+    s = 0;
+// let switch = 0;
 function pickNode(e){
     for (let i = 0; i < gate.length; i++) {
         if (gate[i].nodeA_is_click(e.clientX, e.clientY)){
             console.log('NodeA', i);
-            connection[n] = i
-            console.log(connection);
-            n += 1;
-            connection[n] = 0
+            if(gate[i].get_type() == 'input'){
+                gate[i].set_nodeA_val(s)
+                if(s == 0){ s = 1} else { s = 0 }
+                draw()
+            }else{
+                connection[n] = i
+                console.log(connection);
+                n += 1;
+                connection[n] = 0
+    
+                nodeA_clicked = true;
+            }
+            
+           
 
-            nodeA_clicked = true;
+           
             draw()
         }
         if (gate[i].nodeB_is_click(e.clientX, e.clientY)){
@@ -143,6 +161,9 @@ function pickNode(e){
 
     }
 
+
+
+
     if (n == 2 ){
         connections[k] = connection
         console.log(connections);
@@ -153,3 +174,6 @@ function pickNode(e){
         draw()
     }
 }
+
+
+//Everything good now, i'll add input later...
