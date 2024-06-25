@@ -1,0 +1,98 @@
+:root{
+    --golden-ratio: 1.61803398875;
+    --container:500px;
+    --radius: calc(var(--container) / var(--golden-ratio));
+    --clock-color: #000
+}
+
+
+.main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.setting{
+    
+}
+
+
+
+
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: blueviolet;
+    width: var(--container);
+    height: var(--container);
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+}
+
+
+.clock{
+    position: absolute;
+    background-color: rgb(255, 255, 255);
+    border-radius: 50%;
+    width: var(--radius);
+    height: var(--radius);
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+    text-align: center;
+    background-image:
+    radial-gradient(circle at center, var(--clock-color) 8px, transparent 8px),
+    radial-gradient(circle at center, white 50%, transparent 50%, transparent 65%, white 65%),
+    linear-gradient(to right, transparent 50%, var(--clock-color) 50%, transparent 51%),
+    linear-gradient(to bottom, transparent 50%, var(--clock-color) 50%, transparent 51%),
+    linear-gradient(-30deg, transparent 50%, var(--clock-color) 50%, transparent 51%),
+        linear-gradient(30deg, transparent 50%, var(--clock-color) 50%, transparent 51%),
+     linear-gradient(60deg, transparent 50%,var(--clock-color) 50%, transparent 51%),
+    linear-gradient(-60deg, transparent 50%, var(--clock-color) 50%, transparent 51%);
+
+}
+
+
+.hour{
+    position: absolute;
+    height: 80px;
+    width: 8px;
+    margin: auto;
+    top: -25%;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    border-radius: 4px;
+    background-color: var(--clock-color);
+    transform-origin: bottom ;
+    transform: rotate(0deg);
+}
+
+.minute{
+    position: absolute;
+    height: 100px;
+    width: 8px;
+    margin: auto;
+    top: -32%;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    border-radius: 4px;
+    background-color: var(--clock-color);
+    transform-origin: bottom ;
+    transform: rotate(90deg);
+}
+
+.second{
+    position: absolute;
+    height: 80px;
+    width: 3px;
+    margin: auto;
+    top: -25%;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    border-radius: 4px;
+    background-color: var(--clock-color);
+    transform-origin: bottom ;
+    transform: rotate(172deg);
+
+}

@@ -19,12 +19,9 @@ window.onload = function(){
     enemy()
 }
 
-
 function start(){
     var start = setInterval(function(){
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-       
-        
         enemyPos -= 10;
         if(enemyPos == 0){
             enemyPos = canvas.width

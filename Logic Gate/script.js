@@ -76,7 +76,7 @@ function draw(){
     }
 }
 
-// Check every gate if it get clicked
+// Check every gate if they get clicked
 let clickId = 0;
 canvas.addEventListener('mousedown', e =>{
     for (let i = 0; i < gate.length; i++) {
@@ -88,6 +88,7 @@ canvas.addEventListener('mousedown', e =>{
     }
 });
 
+// for drag and drop
 function onMouseMove(e){
     gate[clickId].setX(e.clientX);
     gate[clickId].setY(e.clientY);
@@ -100,7 +101,7 @@ function onMouseUp(e){
     canvas.removeEventListener('mouseup', onMouseUp);
 }
 
-// Check every node if it get clicked
+// Check every node if they get clicked
 canvas.addEventListener('click', pickNode)
 let k = 0;
 let s = 0;
